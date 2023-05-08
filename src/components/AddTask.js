@@ -1,6 +1,6 @@
-import React from 'react'
-
-function AddTask() {
+import { useDispatch } from "react-redux";
+import { addTask } from "../js/action/action";
+const AddTask = () => {
     const dispatch = useDispatch();
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -12,15 +12,12 @@ function AddTask() {
       dispatch(addTask(task));
       event.target.reset();
     };
-  return (
-    <div>
+  
+    return (
       <form onSubmit={handleSubmit}>
         <input type="text" name="description" placeholder="Add a new task" required />
         <button type="submit">Add</button>
       </form>
-    
-    </div>
-  )
-}
-
-export default AddTask
+    );
+  };
+  export default AddTask;

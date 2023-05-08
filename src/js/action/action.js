@@ -1,13 +1,12 @@
-const ADD_TASK = 'ADD_TASK';
-const EDIT_TASK = 'EDIT_TASK';
-const TOGGLE_FILTER = 'TOGGLE_FILTER';
+import { ADD_TASK, EDIT_TASK, TOGGLE_FILTER,TOGGLE_TASK } from "./type";
 
-const addTask = (task) => ({
+
+ export const addTask = (task) => ({
   type: ADD_TASK,
   payload: task
 });
 
-const editTask = (taskId, updatedTask) => ({
+export const editTask = (taskId, updatedTask) => ({
   type: EDIT_TASK,
   payload: {
     id: taskId,
@@ -15,7 +14,12 @@ const editTask = (taskId, updatedTask) => ({
   }
 });
 
-const toggleFilter = (filter) => ({
+export const toggleFilter = (filter) => ({
   type: TOGGLE_FILTER,
   payload: filter
+});
+export const toggleTask = (filter) => ({
+  type: TOGGLE_TASK,
+  payload: filter
+
 });
