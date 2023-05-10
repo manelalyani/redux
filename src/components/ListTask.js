@@ -1,28 +1,31 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { addTask } from "../js/action/action";
+import { useDispatch, useSelector } from "react-redux";
+import Task from "./Task";
 
-const AddTask = () => {
+const ListTask = () => {
+  const tasks = useSelector((state) =>
+    state.filter === 'done'
+      ? state.tasks.filter((Task) => Task.isDone)
+      : state.filter === 'not'
+      ? state.tasks.filter((task) => !task.isDone)
+      : state.tasks
+  );
   const dispatch = useDispatch();
-  const handleSubmit = (event) => {
-    event.preventDefault();
 
-    const task = {
-      id: new Date().getTime(),
-      description: event.target.description.value,
-      isDone: false,
-    };
-
-    dispatch(addTask(task));
-    event.target.reset();
-  };
+  function handleToggle(id) {
+    dispatch({
+      type: 'TOGGLE_TASK',
+      payload: id,
+    });
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="description" placeholder="Add a new task" required />
-      <button type="submit">Add</button>
-    </form>
-  );
-};
+    <ul>
+      {tasks.map((task) => (
 
-export default AddTask;
+       <Task key={task.id} task={task} onToggle={handleToggle} />
+      ))}
+    </ul>
+  );
+}
+export default ListTask;
